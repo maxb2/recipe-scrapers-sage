@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "recipe-scrapers-sage"
+version = "0.1.0"
+description = ""
+authors = ["Matt Anderson <matt@manderscience.com>"]
+readme = "README.md"
+packages = [{include = "recipe_scrapers_sage"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

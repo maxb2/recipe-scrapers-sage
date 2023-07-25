@@ -1,7 +1,7 @@
 """RecipeSage data models."""
 
 from dataclasses import dataclass
-from typing import Iterable, Optional
+from typing import Iterable, Optional, Type
 
 from recipe_scrapers import AbstractScraper
 
@@ -52,7 +52,7 @@ class RecipeSage:
     comment: Optional[Iterable[Comment]]
 
     @classmethod
-    def from_scraper(cls: "RecipeSage", scraper: AbstractScraper) -> "RecipeSage":
+    def from_scraper(cls: "Type[RecipeSage]", scraper: AbstractScraper) -> "RecipeSage":
         """Create RecipeSage from scraper.
 
         Args:

@@ -18,7 +18,19 @@ black = "^23.7.0"
 pytest = "^7.4.0"
 ruff = "^0.0.280"
 mypy = "^1.4.1"
+duty = "^1.0.0"
+git-changelog = "^2.0.0"
+pytest-cov = "^4.1.0"
+safety = "^2.3.5"
+mkdocs-material = "^9.1.19"
+mkdocs-gen-files = "^0.5.0"
+blacken-docs = "^1.15.0"
 
+
+
+[tool.poetry.group.docs.dependencies]
+mike = "^1.1.2"
+griffe = "^0.32.3"
 
 [tool.isort]
 profile = "black"
@@ -66,6 +78,8 @@ extend-ignore = ["D202", "D205", "D107"]
 
 [tool.ruff.extend-per-file-ignores]
 "tests/*.py" = ["ANN", "S", "ARG001", "B008", "RUF015"]
+"docs_gen_files.py" = ["ANN201"]
+"duties.py" = ["ANN201", "ARG001"]
 
 [tool.ruff.pydocstyle]
 convention = "google"  # Accepts: "google", "numpy", or "pep257".

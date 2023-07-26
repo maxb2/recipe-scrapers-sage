@@ -9,7 +9,6 @@ packages = [{include = "recipe_scrapers_sage"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 recipe-scrapers = "^14.39.0"
-pyld = "^2.0.3"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -25,6 +24,7 @@ safety = "^2.3.5"
 mkdocs-material = "^9.1.19"
 mkdocs-gen-files = "^0.5.0"
 blacken-docs = "^1.15.0"
+ipykernel = "^6.25.0"
 
 
 

@@ -4,17 +4,16 @@ from recipe_scrapers import AbstractScraper
 
 from .models import RecipeSage
 
+from ._types import JSON_LD
 
-def scraper_to_sage(scraper: AbstractScraper) -> RecipeSage:  # noqa: ARG001
-    """Recipe scraper to RecipeSage model.
+
+def export_recipe(scraper: AbstractScraper) -> JSON_LD:
+    """Export recipe to RecipeSage JSON-LD format.
 
     Args:
         scraper (AbstractScraper): recipe scraper
 
-    Raises:
-        NotImplementedError: _description_
-
     Returns:
-        RecipeSage: RecipeSage model
+        JSON_LD: output
     """
-    raise NotImplementedError("This should be implemented.")  # noqa: EM101
+    return RecipeSage.from_scraper(scraper).to_json_ld()

@@ -1,21 +1,12 @@
 """RecipeSage data models."""
 
 from dataclasses import dataclass
-from datetime import timedelta
 from typing import Iterable, Optional, Type
 
 from recipe_scrapers import AbstractScraper
 
 from ._types import JSON_LD, URL, Date, Duration, InstructionType
-
-RECIPE_SAGE_CONTEXT = {
-    "@context": "http://schema.org",
-    "@type": "Recipe",
-}
-
-COMMENT_CONTEXT = {
-    "@type": "Comment",
-}
+from .utils import simple_ISO8601_duration
 
 
 @dataclass
@@ -48,7 +39,7 @@ class Comment:
             JSON_LD: output
         """
         return {
-            **COMMENT_CONTEXT,
+            "@type": "Comment",
             "name": self.name or "Author Notes",
             "text": self.text,
         }
@@ -109,23 +100,14 @@ class RecipeSage:
             JSON_LD: JSON-LD data model
         """
 
-        # TODO: refactor this
-        _prepTime: str = ""
-
-        if isinstance(self.prepTime, timedelta):
-            _prepTime = f"PT{self.prepTime.total_seconds()//60}M"
-        elif isinstance(self.prepTime, str):
-            _prepTime = self.prepTime
-
-        _totalTime: str = ""
-
-        if isinstance(self.totalTime, timedelta):
-            _totalTime = f"PT{self.totalTime.total_seconds()//60}M"
-        elif isinstance(self.totalTime, str):
-            _totalTime = self.totalTime
+        _prepTime: str = simple_ISO8601_duration(self.prepTime) if self.prepTime else ""
+        _totalTime: str = (
+            simple_ISO8601_duration(self.totalTime) if self.totalTime else ""
+        )
 
         return {
-            **RECIPE_SAGE_CONTEXT,
+            "@context": "http://schema.org",
+            "@type": "Recipe",
             "datePublished": self.datePublished or "",
             "description": self.description or "",
             "image": self.image,

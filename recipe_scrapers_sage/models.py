@@ -1,5 +1,6 @@
 """RecipeSage data models."""
 
+import re
 from dataclasses import dataclass
 from typing import Iterable, Optional, Type
 
@@ -74,6 +75,24 @@ class RecipeSage:
             RecipeSage: RecipeSage model
         """
 
+        _instructions = []
+
+        _ins = scraper.schema.data.get("recipeInstructions", [])
+
+        if isinstance(_ins, str):
+            _ins = re.sub(r"\n+", "\n", _ins).splitlines()
+
+        for ins in _ins:
+            if isinstance(ins, dict):
+                _instructions.append(
+                    Instruction(ins.get("@type", "HowToStep"), ins.get("text", ""))
+                )
+            elif isinstance(ins, str):
+                _instructions.append(Instruction("HowToStep", ins))
+            else:
+                message = f"got a bad value: {ins}"
+                raise ValueError(message)
+
         return cls(
             datePublished=scraper.schema.data.get("datePublished", None),
             description=scraper.schema.data.get("description", None),
@@ -81,10 +100,7 @@ class RecipeSage:
             name=scraper.schema.data.get("name"),
             prepTime=scraper.schema.data.get("prepTime", None),
             recipeIngredient=scraper.schema.ingredients(),
-            recipeInstructions=[
-                Instruction(ins.get("@type", "HowToStep"), ins.get("text", ""))
-                for ins in scraper.schema.data.get("recipeInstructions", [])
-            ],
+            recipeInstructions=_instructions,
             recipeYield=scraper.schema.data.get("recipeYield", None),
             totalTime=scraper.schema.data.get("totalTime", None),
             recipeCategory=scraper.schema.data.get("recipeCategory", []),

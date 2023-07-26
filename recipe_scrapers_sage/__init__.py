@@ -2,9 +2,8 @@
 
 from recipe_scrapers import AbstractScraper
 
-from .models import RecipeSage
-
 from ._types import JSON_LD
+from .models import RecipeSage
 
 
 def export_recipe(scraper: AbstractScraper) -> JSON_LD:
@@ -17,3 +16,6 @@ def export_recipe(scraper: AbstractScraper) -> JSON_LD:
         JSON_LD: output
     """
     return RecipeSage.from_scraper(scraper).to_json_ld()
+
+
+__all__ = ["export_recipe", "RecipeSage"]

@@ -12,4 +12,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Features
 
-- initial implementation (#1) ([2fd49e3](https://github.com/maxb2/typer-config/commit/2fd49e3d7044ae2d0c3d835fb54185f08c967820) by Matthew Anderson).
+- initial implementation (#1) ([2fd49e3](https://github.com/maxb2/recipe-scrapers-sage/commit/2fd49e3d7044ae2d0c3d835fb54185f08c967820) by Matthew Anderson).

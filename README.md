@@ -2,7 +2,7 @@
 
 
 [![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/maxb2/recipe-scrapers-sage/ci.yml?branch=main&style=flat-square)](https://github.com/maxb2/recipe-scrapers-sage/actions/workflows/ci.yml)
-[![Codecov](https://img.shields.io/codecov/c/github/maxb2/recipe-scrapers-sage?style=flat-square)](https://app.codecov.io/gh/maxb2/recipe-scrapers-sage)
+[![codecov](https://codecov.io/github/maxb2/recipe-scrapers-sage/branch/main/graph/badge.svg?token=UAPS01UJEG)](https://codecov.io/github/maxb2/recipe-scrapers-sage)
 [![PyPI](https://img.shields.io/pypi/v/recipe-scrapers-sage?style=flat-square)](https://pypi.org/project/recipe-scrapers-sage/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/recipe-scrapers-sage?style=flat-square)](https://pypi.org/project/recipe-scrapers-sage/#history)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/pypi/recipe-scrapers-sage?style=flat-square)](https://libraries.io/pypi/recipe-scrapers-sage)

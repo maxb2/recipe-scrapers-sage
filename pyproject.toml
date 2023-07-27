@@ -7,10 +7,75 @@ readme = "README.md"
 packages = [{include = "recipe_scrapers_sage"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-recipe-scrapers = "^14.39.0"
-pyld = "^2.0.3"
+python = ">=3.8"
+recipe-scrapers = ">=14"
 
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.12.0"
+black = "^23.7.0"
+pytest = "^7.4.0"
+ruff = "^0.0.280"
+mypy = "^1.4.1"
+duty = "^1.0.0"
+git-changelog = "^2.0.0"
+pytest-cov = "^4.1.0"
+safety = "^2.3.5"
+ipykernel = "^6.25.0"
+griffe = "^0.32.3"
+
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.format]
+max-line-length = "88"
+
+[tool.ruff]
+extend-select = [ # https://beta.ruff.rs/docs/rules/
+    "A", 
+    "ANN",
+    "ARG", 
+    "B",
+    "BLE",
+    "C4", 
+    "D", 
+    "E",
+    "EM",
+    "ERA", 
+    "F",
+    "FA",
+    "FBT", 
+    "FIX", 
+    "I", 
+    "ISC", 
+    "ICN", 
+    "INP", 
+    "PERF", 
+    "PIE", 
+    "PL", 
+    "PT", 
+    "Q", 
+    "RSE", 
+    "RET", 
+    "RUF",
+    "S",
+    "SIM", 
+    "T10", 
+    "T20", 
+    "TCH", 
+    "TD", 
+    "TID",
+    "YTT"]
+extend-ignore = ["D202", "D205", "D107"]
+
+[tool.ruff.extend-per-file-ignores]
+"tests/*.py" = ["ANN", "S", "ARG001", "B008", "RUF015", "E501", "D100", "D103"]
+"docs_gen_files.py" = ["ANN201"]
+"duties.py" = ["ANN201", "ARG001"]
+
+[tool.ruff.pydocstyle]
+convention = "google"  # Accepts: "google", "numpy", or "pep257".
 
 [build-system]
 requires = ["poetry-core"]

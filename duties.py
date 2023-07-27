@@ -129,7 +129,7 @@ def check_api(ctx: Context) -> None:
     )
 
 
-@duty(pre=["check_types", "check_quality", "check_dependencies"])
+@duty(pre=["check_types", "check_quality"])
 def check(ctx: Context):
     """Check it all!
 

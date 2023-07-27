@@ -142,10 +142,6 @@ def release(ctx: Context, version: Optional[str] = None):
         pty=PTY,
     )
     ctx.run("poetry publish --build", title="Publish package (poetry)")
-    ctx.run(
-        f"mike deploy --push --update-aliases {version} latest",
-        title="Deploying documentation (mike)",
-    )
     ctx.run(f"git tag {version}", title="Tagging commit (git)", pty=PTY)
     ctx.run("git push", title="Pushing commits (git)", pty=False)
     ctx.run("git push --tags", title="Pushing tags (git)", pty=False)

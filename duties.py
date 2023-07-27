@@ -4,7 +4,7 @@ import os
 from typing import Optional, Tuple
 
 from duty import duty
-from duty.callables import blacken_docs, mkdocs, mypy
+from duty.callables import mypy
 from duty.context import Context
 from git_changelog import Changelog
 from git_changelog.cli import build_and_render
@@ -34,21 +34,7 @@ def _changelog() -> Tuple[Changelog, str]:
     )
 
 
-@duty(aliases=["format_docs"])
-def fmt_docs(ctx: Context):
-    """Format code in docs.
-
-    Args:
-        ctx (Context): the context instance (passed automatically).
-    """
-    ctx.run(
-        blacken_docs.run("docs/", exts=[".md"]),
-        nofail=True,
-        title="Formatting docs (blacken-docs)",
-    )
-
-
-@duty(aliases=["format"], pre=["fmt_docs"])
+@duty(aliases=["format"])
 def fmt(ctx: Context):
     """Format source code.
 
@@ -83,18 +69,6 @@ def check_types(ctx: Context):
 
 
 @duty
-def pylint(ctx: Context):
-    """Run pylint code linting.
-
-    Deprecated: use ruff instead of pylint.
-
-    Args:
-        ctx (Context): the context instance (passed automatically).
-    """
-    ctx.run(f"pylint {MODULE_NAME}", title="Code linting (pylint)")
-
-
-@duty
 def ruff(ctx: Context):
     """Run ruff code linting.
 
@@ -102,15 +76,6 @@ def ruff(ctx: Context):
         ctx (Context): the context instance (passed automatically).
     """
     ctx.run("ruff .", title="Code linting (ruff)")
-
-
-@duty(pre=["ruff"])
-def check_quality(ctx: Context):
-    """Check the code quality.
-
-    Args:
-        ctx (Context): the context instance (passed automatically).
-    """
 
 
 @duty
@@ -129,7 +94,7 @@ def check_api(ctx: Context) -> None:
     )
 
 
-@duty(pre=["check_types", "check_quality"])
+@duty(pre=["check_types", "ruff"])
 def check(ctx: Context):
     """Check it all!
 
@@ -145,28 +110,7 @@ def test(ctx: Context):
     Args:
         ctx (Context): the context instance (passed automatically).
     """
-    ctx.run(
-        "pytest --cov=recipe_scrapers_sage --cov-report=xml", title="Testing (pytest)"
-    )
-
-
-@duty
-def docs(ctx: Context, host: str = "127.0.0.1", port: int = 8000) -> None:
-    """Serve the documentation (localhost:8000).
-
-    Args:
-        ctx (Context): The context instance (passed automatically).
-        host (str, optional): The host to serve the docs from. Defaults to "127.0.0.1".
-        port (int, optional): The port to serve the docs on. Defaults to 8000.
-    """
-    ctx.run(
-        mkdocs.serve(
-            dev_addr=f"{host}:{port}",
-            watch=["docs", MODULE_NAME, "docs_gen_files.py"],
-        ),
-        title="Serving documentation (mkdocs)",
-        capture=False,
-    )
+    ctx.run(f"pytest --cov={MODULE_NAME} --cov-report=xml", title="Testing (pytest)")
 
 
 @duty

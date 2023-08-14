@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Tuple
 
 from duty import duty
 from duty.callables import mypy
@@ -20,11 +20,11 @@ PTY = not WINDOWS and not CI
 MODULE_NAME = "recipe_scrapers_sage"
 
 
-def _changelog() -> tuple[Changelog, str]:
+def _changelog() -> Tuple[Changelog, str]:
     """Update changelog in-place.
 
     Returns:
-        tuple[Changelog, str]: changelog object and contents
+        Tuple[Changelog, str]: changelog object and contents
     """
     return build_and_render(
         repository=".",
@@ -136,7 +136,7 @@ def release(ctx: Context, version: str | None = None):
         version (str, optional): The new version number to use. Defaults to None.
     """
     if version is None:
-        res: tuple[Changelog, str] = _changelog()
+        res: Tuple[Changelog, str] = _changelog()
         version: str = res[0].versions_list[0].planned_tag
     ctx.run(f"poetry version {version}", title="Bumping version (poetry)")
     ctx.run("git add pyproject.toml CHANGELOG.md", title="Staging files (git)")

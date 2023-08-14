@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Iterable
+from typing import TYPE_CHECKING, Iterable, Optional
 
 from .utils import simple_ISO8601_duration
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from recipe_scrapers import AbstractScraper
 
     from ._types import JSON_LD, URL, Date, Duration, InstructionType
@@ -54,18 +54,18 @@ class Comment:
 class RecipeSage:
     """RecipeSage data model."""
 
-    datePublished: Date | None
-    description: str | None
+    datePublished: Optional[Date]
+    description: Optional[str]
     image: Iterable[URL]
     name: str
-    prepTime: Duration | None
+    prepTime: Optional[Duration]
     recipeIngredient: Iterable[str]
     recipeInstructions: Iterable[Instruction]
-    recipeYield: str | None
-    totalTime: Duration | None
+    recipeYield: Optional[str]
+    totalTime: Optional[Duration]
     recipeCategory: Iterable[str]
-    creditText: str | None
-    isBasedOn: URL | None
+    creditText: Optional[str]
+    isBasedOn: Optional[URL]
     comment: Iterable[Comment]
 
     @classmethod

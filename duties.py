@@ -1,13 +1,17 @@
 """Project Duties."""
 
+from __future__ import annotations
+
 import os
-from typing import Optional, Tuple
+from typing import TYPE_CHECKING
 
 from duty import duty
 from duty.callables import mypy
-from duty.context import Context
-from git_changelog import Changelog
 from git_changelog.cli import build_and_render
+
+if TYPE_CHECKING:
+    from duty.context import Context
+    from git_changelog import Changelog
 
 CI = os.environ.get("CI", "0") in {"1", "true", "yes", ""}
 WINDOWS = os.name == "nt"
@@ -16,11 +20,11 @@ PTY = not WINDOWS and not CI
 MODULE_NAME = "recipe_scrapers_sage"
 
 
-def _changelog() -> Tuple[Changelog, str]:
+def _changelog() -> tuple[Changelog, str]:
     """Update changelog in-place.
 
     Returns:
-        Tuple[Changelog, str]: changelog object and contents
+        tuple[Changelog, str]: changelog object and contents
     """
     return build_and_render(
         repository=".",
@@ -124,7 +128,7 @@ def changelog(ctx: Context):
 
 
 @duty()
-def release(ctx: Context, version: Optional[str] = None):
+def release(ctx: Context, version: str | None = None):
     """Release a new Python package.
 
     Args:
@@ -132,7 +136,7 @@ def release(ctx: Context, version: Optional[str] = None):
         version (str, optional): The new version number to use. Defaults to None.
     """
     if version is None:
-        res: Tuple[Changelog, str] = _changelog()
+        res: tuple[Changelog, str] = _changelog()
         version: str = res[0].versions_list[0].planned_tag
     ctx.run(f"poetry version {version}", title="Bumping version (poetry)")
     ctx.run("git add pyproject.toml CHANGELOG.md", title="Staging files (git)")

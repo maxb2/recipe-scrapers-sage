@@ -1,13 +1,17 @@
 """RecipeSage data models."""
 
+from __future__ import annotations
+
 import re
 from dataclasses import dataclass
-from typing import Iterable, Optional, Type
+from typing import TYPE_CHECKING, Iterable, Optional
 
-from recipe_scrapers import AbstractScraper
-
-from ._types import JSON_LD, URL, Date, Duration, InstructionType
 from .utils import simple_ISO8601_duration
+
+if TYPE_CHECKING:  # pragma: no cover
+    from recipe_scrapers import AbstractScraper
+
+    from ._types import JSON_LD, URL, Date, Duration, InstructionType
 
 
 @dataclass
@@ -17,7 +21,7 @@ class Instruction:
     _type: InstructionType
     text: str
 
-    def to_json_ld(self: "Instruction") -> JSON_LD:
+    def to_json_ld(self: Instruction) -> JSON_LD:
         """Export to JSON-LD.
 
         Returns:
@@ -33,7 +37,7 @@ class Comment:
     name: str
     text: str
 
-    def to_json_ld(self: "Comment") -> JSON_LD:
+    def to_json_ld(self: Comment) -> JSON_LD:
         """Export to JSON-LD.
 
         Returns:
@@ -65,7 +69,7 @@ class RecipeSage:
     comment: Iterable[Comment]
 
     @classmethod
-    def from_scraper(cls: "Type[RecipeSage]", scraper: AbstractScraper) -> "RecipeSage":
+    def from_scraper(cls: type[RecipeSage], scraper: AbstractScraper) -> RecipeSage:
         """Create RecipeSage from scraper.
 
         Args:
@@ -109,7 +113,7 @@ class RecipeSage:
             comment=[],
         )
 
-    def to_json_ld(self: "RecipeSage") -> JSON_LD:
+    def to_json_ld(self: RecipeSage) -> JSON_LD:
         """Convert to JSON-LD for import/export.
 
         Returns:

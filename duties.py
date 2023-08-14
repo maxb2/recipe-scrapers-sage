@@ -1,13 +1,17 @@
 """Project Duties."""
 
+from __future__ import annotations
+
 import os
-from typing import Optional, Tuple
+from typing import TYPE_CHECKING, Tuple
 
 from duty import duty
 from duty.callables import mypy
-from duty.context import Context
-from git_changelog import Changelog
 from git_changelog.cli import build_and_render
+
+if TYPE_CHECKING:
+    from duty.context import Context
+    from git_changelog import Changelog
 
 CI = os.environ.get("CI", "0") in {"1", "true", "yes", ""}
 WINDOWS = os.name == "nt"
@@ -124,7 +128,7 @@ def changelog(ctx: Context):
 
 
 @duty()
-def release(ctx: Context, version: Optional[str] = None):
+def release(ctx: Context, version: str | None = None):
     """Release a new Python package.
 
     Args:

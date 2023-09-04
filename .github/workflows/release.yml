@@ -1,8 +1,9 @@
 name: github_release
 
-on: push
-  tags: 
-    - "*"
+on:
+  push:
+    tags:
+      - "*"
 
 jobs:
   github_release:

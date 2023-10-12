@@ -33,7 +33,7 @@ def _changelog() -> Tuple[Changelog, str]:
         template="keepachangelog",
         parse_trailers=True,
         parse_refs=False,
-        bump_latest=True,
+        bump="auto",
         in_place=True,
     )
 

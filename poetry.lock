@@ -1554,13 +1554,13 @@ tests = ["html5lib", "pytest", "pytest-cov"]
 
 [[package]]
 name = "recipe-scrapers"
-version = "14.51.0"
+version = "14.52.0"
 description = "Python package, scraping recipes from all over the internet"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "recipe_scrapers-14.51.0-py3-none-any.whl", hash = "sha256:75c51d87e4556222b4b4138e376d9a9d29308a0312b37b8588054920a1ac490f"},
-    {file = "recipe_scrapers-14.51.0.tar.gz", hash = "sha256:6c742c93b13cff84adc481bf60422d71d8221ee90a745599301363032cf4d854"},
+    {file = "recipe_scrapers-14.52.0-py3-none-any.whl", hash = "sha256:3514048808c7b7de467bfa56bea3921ecff637441cde9085186345e3ce7cabdc"},
+    {file = "recipe_scrapers-14.52.0.tar.gz", hash = "sha256:3d1d2cf7ad8c5fd73b5a0e921b3505daeddb42da705ef5c68523a465ccd8cd8f"},
 ]
 
 [package.dependencies]

@@ -22,7 +22,7 @@ git-changelog = "^2.0.0"
 pytest-cov = ">=4.1,<6.0"
 safety = ">=2.3.5,<4.0.0"
 ipykernel = "^6.25.0"
-griffe = ">=0.32.3,<0.43.0"
+griffe = ">=0.32.3,<0.45.0"
 
 
 [tool.isort]

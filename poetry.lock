@@ -685,13 +685,13 @@ tomli = {version = ">=2.0", markers = "python_version < \"3.11\""}
 
 [[package]]
 name = "griffe"
-version = "0.44.0"
+version = "0.47.0"
 description = "Signatures for entire Python programs. Extract the structure, the frame, the skeleton of your project, to generate API documentation or find breaking changes in your API."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "griffe-0.44.0-py3-none-any.whl", hash = "sha256:8a4471c469ba980b87c843f1168850ce39d0c1d0c7be140dca2480f76c8e5446"},
-    {file = "griffe-0.44.0.tar.gz", hash = "sha256:34aee1571042f9bf00529bc715de4516fb6f482b164e90d030300601009e0223"},
+    {file = "griffe-0.47.0-py3-none-any.whl", hash = "sha256:07a2fd6a8c3d21d0bbb0decf701d62042ccc8a576645c7f8799fe1f10de2b2de"},
+    {file = "griffe-0.47.0.tar.gz", hash = "sha256:95119a440a3c932b13293538bdbc405bee4c36428547553dc6b327e7e7d35e5a"},
 ]
 
 [package.dependencies]
@@ -2172,4 +2172,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8"
-content-hash = "969ecd7eb6027085b0631b9c16ec5ae49da2cb1357da94aeb037379d3a09d498"
+content-hash = "c3d9c41aeda807da99029a309eb175b84e028d59fd2064188be1ae889774245c"

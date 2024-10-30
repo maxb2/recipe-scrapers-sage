@@ -7,7 +7,7 @@ from recipe_scrapers_sage import RecipeSage, export_recipe
 from recipe_scrapers_sage.models import Comment
 
 
-@pytest.fixture()
+@pytest.fixture
 def testhtml():
     with open("tests/test_data/foodnetwork.testhtml", "r") as f:
         return f.read()

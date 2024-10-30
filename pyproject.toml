@@ -31,7 +31,7 @@ profile = "black"
 [tool.pylint.format]
 max-line-length = "88"
 
-[tool.ruff]
+[tool.ruff.lint]
 extend-select = [ # https://beta.ruff.rs/docs/rules/
     "A", 
     "ANN",
@@ -68,14 +68,12 @@ extend-select = [ # https://beta.ruff.rs/docs/rules/
     "TID",
     "YTT"]
 extend-ignore = ["D202", "D205", "D107"]
+pydocstyle.convention = "google"  # Accepts: "google", "numpy", or "pep257".
 
-[tool.ruff.extend-per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "tests/*.py" = ["ANN", "S", "ARG001", "B008", "RUF015", "E501", "D100", "D103"]
 "docs_gen_files.py" = ["ANN201"]
 "duties.py" = ["ANN201", "ARG001"]
-
-[tool.ruff.pydocstyle]
-convention = "google"  # Accepts: "google", "numpy", or "pep257".
 
 [build-system]
 requires = ["poetry-core"]

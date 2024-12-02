@@ -623,23 +623,23 @@ tests = ["asttokens", "littleutils", "pytest", "rich"]
 
 [[package]]
 name = "extruct"
-version = "0.16.0"
+version = "0.18.0"
 description = "Extract embedded metadata from HTML markup"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "extruct-0.16.0-py2.py3-none-any.whl", hash = "sha256:2499ea9e7d22744745ca708acee9542a4aa231871620c4f65f869a1286e64aa8"},
-    {file = "extruct-0.16.0.tar.gz", hash = "sha256:d09cb3d86d149a276b277b3bd45b2b867ef3ec78bed9cd58ee0f2ae01ae670c4"},
+    {file = "extruct-0.18.0-py2.py3-none-any.whl", hash = "sha256:1e739985da705c3348c7614dc169e7780caf20908338fa5f4c6e48576df6f000"},
+    {file = "extruct-0.18.0.tar.gz", hash = "sha256:b5b48d459003b27c05ee91527b14a5a31735231aaf85d2b1f331d4db879318dd"},
 ]
 
 [package.dependencies]
 html-text = ">=0.5.1"
 jstyleson = "*"
 lxml = "*"
+lxml-html-clean = "*"
 mf2py = "*"
 pyrdfa3 = "*"
-rdflib = {version = ">=6.0.0", markers = "python_version >= \"3.7\""}
-six = "*"
+rdflib = ">=6.0.0"
 w3lib = "*"
 
 [package.extras]
@@ -1081,6 +1081,20 @@ cssselect = ["cssselect (>=0.7)"]
 html5 = ["html5lib"]
 htmlsoup = ["BeautifulSoup4"]
 source = ["Cython (>=0.29.35)"]
+
+[[package]]
+name = "lxml-html-clean"
+version = "0.4.1"
+description = "HTML cleaner from lxml project"
+optional = false
+python-versions = "*"
+files = [
+    {file = "lxml_html_clean-0.4.1-py3-none-any.whl", hash = "sha256:b704f2757e61d793b1c08bf5ad69e4c0b68d6696f4c3c1429982caf90050bcaf"},
+    {file = "lxml_html_clean-0.4.1.tar.gz", hash = "sha256:40c838bbcf1fc72ba4ce811fbb3135913017b27820d7c16e8bc412ae1d8bc00b"},
+]
+
+[package.dependencies]
+lxml = "*"
 
 [[package]]
 name = "markdown-it-py"
@@ -1847,20 +1861,23 @@ tests = ["html5lib", "pytest", "pytest-cov"]
 
 [[package]]
 name = "recipe-scrapers"
-version = "14.56.0"
+version = "15.3.2"
 description = "Python package, scraping recipes from all over the internet"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "recipe_scrapers-14.56.0-py3-none-any.whl", hash = "sha256:77ad1a1d21077877dd5d29ae0423a488bdf9084fb495d7f8a8b20dd2545160cf"},
-    {file = "recipe_scrapers-14.56.0.tar.gz", hash = "sha256:97b40b33a2e29416a7348d86db784a1e21568b78d978c3148b572244ff85ca00"},
+    {file = "recipe_scrapers-15.3.2-py3-none-any.whl", hash = "sha256:4fc361512b899fefbcf1426e769880e909edf4d4ab875fcb670a98f3ce8a7c21"},
+    {file = "recipe_scrapers-15.3.2.tar.gz", hash = "sha256:434dfee1ff5769f168f1bef979f89e17b6bb60b0501577971f54c13fc1809387"},
 ]
 
 [package.dependencies]
 beautifulsoup4 = ">=4.12.3"
-extruct = ">=0.15.0"
+extruct = ">=0.17.0"
 isodate = ">=0.6.1"
-requests = ">=2.31.0"
+
+[package.extras]
+dev = ["coverage (>=7.4.4)", "importlib-metadata (>=4.6)", "types-beautifulsoup4 (>=4.12.0)"]
+online = ["requests (>=2.31.0)"]
 
 [[package]]
 name = "requests"

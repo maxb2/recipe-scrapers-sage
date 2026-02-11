@@ -101,7 +101,7 @@ class RecipeSage:
             datePublished=scraper.schema.data.get("datePublished", None),
             description=scraper.schema.data.get("description", None),
             image=scraper.schema.image(),
-            name=scraper.schema.data.get("name"),
+            name=scraper.schema.data.get("name", "UNKNOWN"),
             prepTime=scraper.schema.data.get("prepTime", None),
             recipeIngredient=scraper.schema.ingredients(),
             recipeInstructions=_instructions,

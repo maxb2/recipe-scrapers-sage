@@ -1,28 +1,46 @@
-[tool.poetry]
+[project]
 name = "recipe-scrapers-sage"
 version = "0.1.0"
 description = ""
-authors = ["Matt Anderson <matt@manderscience.com>"]
+authors = [{ name = "Matt Anderson", email = "matt@manderscience.com" }]
+requires-python = ">=3.9,<4"
 readme = "README.md"
-packages = [{include = "recipe_scrapers_sage"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = ["recipe-scrapers>=14"]
 
-[tool.poetry.dependencies]
-python = ">=3.9,<4"
-recipe-scrapers = ">=14"
+[dependency-groups]
+dev = [
+    "isort>=5.12.0,<6",
+    "black>=23.7,<25.0",
+    "pytest>=7.4,<9.0",
+    "ruff>=0.0.280,<0.7.2",
+    "mypy>=1.4.1,<2",
+    "duty>=1.0.0,<2",
+    "git-changelog>=2.0.0,<3",
+    "pytest-cov>=4.1,<6.0",
+    "safety>=2.3.5,<4.0.0",
+    "ipykernel>=6.25.0,<7",
+    "griffe>=0.32.3,<1.6.0",
+    "ty>=0.0.16",
+]
 
+[tool.uv]
 
-[tool.poetry.group.dev.dependencies]
-isort = "^5.12.0"
-black = ">=23.7,<25.0"
-pytest = ">=7.4,<9.0"
-ruff = ">=0.0.280,<0.7.2"
-mypy = "^1.4.1"
-duty = "^1.0.0"
-git-changelog = "^2.0.0"
-pytest-cov = ">=4.1,<6.0"
-safety = ">=2.3.5,<4.0.0"
-ipykernel = "^6.25.0"
-griffe = ">=0.32.3,<1.6.0"
+[tool.uv.build-backend]
+module-name = ["recipe_scrapers_sage"]
+module-root = ""
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10.0"]
+build-backend = "uv_build"
 
 
 [tool.isort]
@@ -74,7 +92,3 @@ pydocstyle.convention = "google"  # Accepts: "google", "numpy", or "pep257".
 "tests/*.py" = ["ANN", "S", "ARG001", "B008", "RUF015", "E501", "D100", "D103"]
 "docs_gen_files.py" = ["ANN201"]
 "duties.py" = ["ANN201", "ARG001"]
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"

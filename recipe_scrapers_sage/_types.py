@@ -9,7 +9,7 @@ if TYPE_CHECKING:  # pragma: no cover
     import sys
 
     if sys.version_info > (3, 9):
-        from typing import TypeAlias
+        from typing import TypeAlias  # type: ignore[import]
     else:
         from typing_extensions import TypeAlias
 

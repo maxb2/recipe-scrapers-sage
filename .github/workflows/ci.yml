@@ -24,27 +24,23 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
-      
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      
-      - name: Setup Poetry
-        uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: 1.4
-      
+
       - name: Install Dependencies
-        run: poetry install -n --all-extras
-      
+        run: uv sync --all-extras --group dev
+
       - name: Linting and Type checking
-        run: |
-          poetry run duty check
-      
+        run: make check
+
       - name: Testing
-        run: |
-          poetry run duty test
+        run: make test
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5

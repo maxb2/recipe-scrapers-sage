@@ -18,4 +18,4 @@ def export_recipe(scraper: AbstractScraper) -> JSON_LD:
     return RecipeSage.from_scraper(scraper).to_json_ld()
 
 
-__all__ = ["export_recipe", "RecipeSage"]
+__all__ = ["RecipeSage", "export_recipe"]

@@ -61,13 +61,13 @@ RESULT = {
     "totalTime": "",
     "recipeCategory": ["main-course", "lunch"],
     "creditText": "",
-    "isBasedOn": "",
+    "isBasedOn": "https://www.foodnetwork.co.uk/",
     "comment": [],
 }
 
 
 def test_export(testhtml):
-    scraper = scrape_html(testhtml)
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
 
     out = export_recipe(scraper)
 
@@ -75,7 +75,7 @@ def test_export(testhtml):
 
 
 def test_comment(testhtml):
-    scraper = scrape_html(testhtml)
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
 
     sage = RecipeSage.from_scraper(scraper)
 
@@ -91,7 +91,7 @@ def test_comment(testhtml):
 
 
 def test_instruction(testhtml):
-    scraper = scrape_html(testhtml)
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
 
     _ins = [
         {"text": ins}

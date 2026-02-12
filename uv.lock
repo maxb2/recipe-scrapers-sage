@@ -517,21 +517,21 @@ wheels = [
 
 [[package]]
 name = "extruct"
-version = "0.16.0"
+version = "0.18.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "html-text" },
     { name = "jstyleson" },
     { name = "lxml" },
+    { name = "lxml-html-clean" },
     { name = "mf2py" },
     { name = "pyrdfa3" },
     { name = "rdflib" },
-    { name = "six" },
     { name = "w3lib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f1/62/11177a72e64d6ab8b1021d94d25930bc46abf8e58e40b0e67a7220fac05a/extruct-0.16.0.tar.gz", hash = "sha256:d09cb3d86d149a276b277b3bd45b2b867ef3ec78bed9cd58ee0f2ae01ae670c4", size = 37312, upload-time = "2023-07-07T10:39:30.375Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/dd/5ba7345dafaa2b5ccbfd441c7bcfc74bae1176aac9acb0d746b6bb327979/extruct-0.18.0.tar.gz", hash = "sha256:b5b48d459003b27c05ee91527b14a5a31735231aaf85d2b1f331d4db879318dd", size = 44170, upload-time = "2024-11-08T14:59:24.26Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ee/ba/6cda7321aa72f7438d8e98325296d1cfa9da3b0f3e1416612389ffc84cc9/extruct-0.16.0-py2.py3-none-any.whl", hash = "sha256:2499ea9e7d22744745ca708acee9542a4aa231871620c4f65f869a1286e64aa8", size = 26286, upload-time = "2023-07-07T10:39:28.82Z" },
+    { url = "https://files.pythonhosted.org/packages/33/00/60d3efc09d52a9e8d57b59323d7edb962daba2f1c46b89449a252f3652e7/extruct-0.18.0-py2.py3-none-any.whl", hash = "sha256:1e739985da705c3348c7614dc169e7780caf20908338fa5f4c6e48576df6f000", size = 26359, upload-time = "2024-11-08T14:59:22.806Z" },
 ]
 
 [[package]]
@@ -800,6 +800,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/e5/47/fab85a1b473be9fc2a3b3329e0970b287123bd02367fe83ae06ca6ef5f58/lxml-4.9.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl", hash = "sha256:e4da8ca0c0c0aea88fd46be8e44bd49716772358d648cce45fe387f7b92374a7", size = 5972830, upload-time = "2023-07-07T09:49:13.939Z" },
     { url = "https://files.pythonhosted.org/packages/1b/ea/50d8357ed72f6c8352fe08657a9b05d672a4ab2470b9447fd73d87f0d47a/lxml-4.9.3-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:fe4bda6bd4340caa6e5cf95e73f8fea5c4bfc55763dd42f1b50a94c1b4a2fbd4", size = 6324247, upload-time = "2023-07-05T11:53:40.938Z" },
     { url = "https://files.pythonhosted.org/packages/c5/c3/5d4c530891dc77121536883772dd81e93142ef4fe82e07d156821f2df037/lxml-4.9.3-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:f3df3db1d336b9356dd3112eae5f5c2b8b377f3bc826848567f10bfddfee77e9", size = 3460356, upload-time = "2023-07-05T11:53:43.779Z" },
+]
+
+[[package]]
+name = "lxml-html-clean"
+version = "0.4.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lxml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d9/cb/c9c5bb2a9c47292e236a808dd233a03531f53b626f36259dcd32b49c76da/lxml_html_clean-0.4.3.tar.gz", hash = "sha256:c9df91925b00f836c807beab127aac82575110eacff54d0a75187914f1bd9d8c", size = 21498, upload-time = "2025-10-02T20:49:24.895Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/4a/63a9540e3ca73709f4200564a737d63a4c8c9c4dd032bab8535f507c190a/lxml_html_clean-0.4.3-py3-none-any.whl", hash = "sha256:63fd7b0b9c3a2e4176611c2ca5d61c4c07ffca2de76c14059a81a2825833731e", size = 14177, upload-time = "2025-10-02T20:49:23.749Z" },
 ]
 
 [[package]]
@@ -1231,17 +1243,16 @@ wheels = [
 
 [[package]]
 name = "recipe-scrapers"
-version = "14.56.0"
+version = "15.10.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "extruct" },
     { name = "isodate" },
-    { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7d/66/4e43f407c2c61e221759d8548609b87d34c0cf36a16852af4b89f297130a/recipe_scrapers-14.56.0.tar.gz", hash = "sha256:97b40b33a2e29416a7348d86db784a1e21568b78d978c3148b572244ff85ca00", size = 100580, upload-time = "2024-04-25T15:07:46.465Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7a/53/71b7e70414921f448a23638fceace0271e1d32cad2d49839bd95c9d9bf8f/recipe_scrapers-15.10.0.tar.gz", hash = "sha256:ef93fc5347e0f181a20c4a989cb7c21e924e068546d864aebe26b5f55f344c7b", size = 141015, upload-time = "2025-11-12T14:00:03.283Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e6/20/73fcc0cdb08c06add31fd83513efaddb9b4b62f65c0c1bccd71b2df5836f/recipe_scrapers-14.56.0-py3-none-any.whl", hash = "sha256:77ad1a1d21077877dd5d29ae0423a488bdf9084fb495d7f8a8b20dd2545160cf", size = 218761, upload-time = "2024-04-25T15:07:42.811Z" },
+    { url = "https://files.pythonhosted.org/packages/9a/a8/fa061499bfcb73895f89bd7c322c6f5be23e2090867d2f9339523660bc77/recipe_scrapers-15.10.0-py3-none-any.whl", hash = "sha256:bc87593c6efb3c39ba56e65d484417ad6702767e26e9a0602815c3440b14df75", size = 299160, upload-time = "2025-11-12T14:00:00.94Z" },
 ]
 
 [[package]]

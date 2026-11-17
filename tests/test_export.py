@@ -2,6 +2,7 @@ import re
 
 import pytest
 from recipe_scrapers import scrape_html
+from recipe_scrapers._exceptions import ElementNotFoundInHtml
 
 from recipe_scrapers_sage import RecipeSage, export_recipe
 from recipe_scrapers_sage.models import Comment
@@ -63,6 +64,7 @@ RESULT = {
     "creditText": "",
     "isBasedOn": "https://www.foodnetwork.co.uk/",
     "comment": [],
+    "author": "Food Network",
 }
 
 
@@ -110,3 +112,71 @@ def test_instruction(testhtml):
 
     with pytest.raises(ValueError, match="got a bad value"):
         RecipeSage.from_scraper(scraper)
+
+
+def test_author_omitted_when_missing(testhtml):
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
+    scraper.schema.data.pop("author", None)
+
+    out = export_recipe(scraper)
+
+    assert "author" not in out
+
+
+def test_nutrition(testhtml):
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
+    scraper.schema.data["nutrition"] = {
+        "@type": "NutritionInformation",
+        "calories": "88.5",
+        "fatContent": "8.2 grams",
+        "sodiumContent": "",
+    }
+
+    out = export_recipe(scraper)
+
+    assert out["nutrition"] == {
+        "@type": "NutritionInformation",
+        "calories": "88.5",
+        "fatContent": "8.2 grams",
+    }
+
+
+def test_nutrition_omitted_when_missing(testhtml):
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
+
+    assert "nutrition" not in export_recipe(scraper)
+
+
+@pytest.mark.parametrize(
+    ("notes", "expected"),
+    [
+        ("A note.", "A note."),
+        (["First.", "", "Second."], "First.\nSecond."),
+        ("", None),
+        ([], None),
+    ],
+)
+def test_notes(testhtml, monkeypatch, notes, expected):
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
+    monkeypatch.setattr(scraper, "notes", lambda: notes, raising=False)
+
+    out = export_recipe(scraper)
+
+    if expected is None:
+        assert out["comment"] == []
+    else:
+        assert out["comment"] == [
+            {"@type": "Comment", "name": "Author Notes", "text": expected}
+        ]
+
+
+def test_notes_error(testhtml, monkeypatch):
+    scraper = scrape_html(testhtml, org_url="https://www.foodnetwork.co.uk/")
+
+    def _raise():
+        message = "notes"
+        raise ElementNotFoundInHtml(message)
+
+    monkeypatch.setattr(scraper, "notes", _raise, raising=False)
+
+    assert export_recipe(scraper)["comment"] == []

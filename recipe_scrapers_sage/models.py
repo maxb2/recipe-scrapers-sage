@@ -6,6 +6,8 @@ import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Iterable, Optional
 
+from recipe_scrapers._exceptions import RecipeScrapersExceptions
+
 from .utils import simple_ISO8601_duration
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -50,6 +52,30 @@ class Comment:
         }
 
 
+def _notes_to_comments(scraper: AbstractScraper) -> list[Comment]:
+    """Convert scraper notes, when the site supports them, to an author notes comment.
+
+    Args:
+        scraper (AbstractScraper): recipe scraper
+
+    Returns:
+        list[Comment]: a single "Author Notes" comment, or an empty list
+    """
+    notes_fn = getattr(scraper, "notes", None)
+    if not callable(notes_fn):
+        return []
+
+    try:
+        notes = notes_fn()
+    except (RecipeScrapersExceptions, NotImplementedError):
+        return []
+
+    if isinstance(notes, (list, tuple)):
+        notes = "\n".join(note for note in notes if note)
+
+    return [Comment("Author Notes", notes)] if notes else []
+
+
 @dataclass
 class RecipeSage:
     """RecipeSage data model."""
@@ -67,6 +93,8 @@ class RecipeSage:
     creditText: Optional[str]
     isBasedOn: Optional[URL]
     comment: Iterable[Comment]
+    author: Optional[str] = None
+    nutrition: Optional[dict[str, str]] = None
 
     @classmethod
     def from_scraper(cls: type[RecipeSage], scraper: AbstractScraper) -> RecipeSage:
@@ -110,7 +138,9 @@ class RecipeSage:
             recipeCategory=scraper.schema.data.get("recipeCategory", []),
             creditText=None,
             isBasedOn=scraper.url,
-            comment=[],
+            comment=_notes_to_comments(scraper),
+            author=scraper.schema.author() or None,
+            nutrition=scraper.schema.nutrients() or None,
         )
 
     def to_json_ld(self: RecipeSage) -> JSON_LD:
@@ -125,7 +155,7 @@ class RecipeSage:
             simple_ISO8601_duration(self.totalTime) if self.totalTime else ""
         )
 
-        return {
+        out: JSON_LD = {
             "@context": "http://schema.org",
             "@type": "Recipe",
             "datePublished": self.datePublished or "",
@@ -146,3 +176,12 @@ class RecipeSage:
             "isBasedOn": self.isBasedOn or "",
             "comment": [comment.to_json_ld() for comment in self.comment],
         }
+
+        # RecipeSage uses `author` as the source when `creditText` is empty.
+        if self.author:
+            out["author"] = self.author
+
+        if self.nutrition:
+            out["nutrition"] = {"@type": "NutritionInformation", **self.nutrition}
+
+        return out

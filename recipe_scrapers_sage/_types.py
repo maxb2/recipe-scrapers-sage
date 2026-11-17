@@ -3,16 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta
-from typing import TYPE_CHECKING, Literal, Union
-
-if TYPE_CHECKING:  # pragma: no cover
-    import sys
-
-    if sys.version_info > (3, 9):
-        from typing import TypeAlias  # type: ignore
-    else:
-        from typing_extensions import TypeAlias
-
+from typing import Literal, TypeAlias, Union
 
 JSON_LD: TypeAlias = dict
 ISO8601_Date: TypeAlias = str

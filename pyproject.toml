@@ -1,6 +1,6 @@
 [project]
 name = "recipe-scrapers-sage"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = [{ name = "Matt Anderson", email = "matt@manderscience.com" }]
 requires-python = ">=3.10,<4"
